@@ -8,7 +8,7 @@ import NotePage from "./pages/NotePage";
 import DB from "./db";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState({});
   const [db, setDB] = useState(new DB());
 
   useEffect( () => {
@@ -20,12 +20,17 @@ function App() {
     fetchNotes();
   }, []);
 
-  const saveNewNote = newNote => {
-    const newNoteID = notes.length;
-    newNote['_id'] = newNoteID;
-    setNotes(prevNotes => [...prevNotes, newNote]);
+  const saveNewNote = async (newNote) => {
+    let { id } = await db.createNote(newNote);
+    // setNotes(prevNotes => [...prevNotes, newNote]);
+    setNotes(prevNotes => {
+      return {
+        ...prevNotes,
+        [id]: newNote
+      }
+    })
 
-    return newNoteID;
+    return id;
   }
 
   return (

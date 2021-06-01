@@ -20,9 +20,9 @@ const NewPage = ({onSave, history}) => {
     });
   }
 
-  const submitNote = e => {
+  const submitNote = async (e) => {
     e.preventDefault();
-    const newNoteID = onSave(note);
+    const newNoteID = await onSave(note);
 
     history.replace(`/notes/${newNoteID}`);
   }
