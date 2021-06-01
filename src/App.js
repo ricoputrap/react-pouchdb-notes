@@ -14,7 +14,6 @@ function App() {
   useEffect( () => {
     const fetchNotes = async () => {
       const fetchedNotes = await db.getAllNotes();
-      console.log('fetchedNotes:', fetchedNotes)
       setNotes(fetchedNotes);
     }
     fetchNotes();
@@ -22,7 +21,7 @@ function App() {
 
   const saveNewNote = async (newNote) => {
     let { id } = await db.createNote(newNote);
-    // setNotes(prevNotes => [...prevNotes, newNote]);
+    
     setNotes(prevNotes => {
       return {
         ...prevNotes,
