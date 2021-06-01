@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
+import NewPage from "./pages/NewPage";
 import NotePage from "./pages/NotePage";
 
 function App() {
@@ -19,7 +20,16 @@ function App() {
       body: "This is the body of my second notes.",
       updatedAt: new Date()
     }
-  ])
+  ]);
+
+  const saveNewNote = newNote => {
+    const newNoteID = notes.length;
+    newNote['_id'] = newNoteID;
+    setNotes(prevNotes => [...prevNotes, newNote]);
+
+    return newNoteID;
+  }
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -27,6 +37,7 @@ function App() {
         <div className="app-content">
           <Route exact path="/" component={props => <HomePage {...props} notes={notes} />} />
           <Route exact path="/notes/:id" component={props => <NotePage {...props} note={notes[props.match.params.id]} />} />
+          <Route exact path="/new" component={props => <NewPage {...props} onSave={saveNewNote} /> } />
         </div>
       </div>
     </BrowserRouter>
