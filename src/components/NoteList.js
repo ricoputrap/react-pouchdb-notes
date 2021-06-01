@@ -4,7 +4,7 @@ const NoteList = ({notes}) => {
   return (
     <div>
       {notes.map(note => (
-        <div>
+        <div key={note.id}>
           <Link to={`/notes/${note._id}`}>
             <h2>{note.title}</h2>
           </Link>

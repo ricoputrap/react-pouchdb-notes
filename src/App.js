@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import './App.css';
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import NotePage from "./pages/NotePage";
 
@@ -22,8 +23,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Route exact path="/" component={props => <HomePage {...props} notes={notes} />} />
-        <Route exact path="/notes/:id" component={props => <NotePage {...props} note={notes[props.match.params.id]} />} />
+        <Navbar /> 
+        <div className="app-content">
+          <Route exact path="/" component={props => <HomePage {...props} notes={notes} />} />
+          <Route exact path="/notes/:id" component={props => <NotePage {...props} note={notes[props.match.params.id]} />} />
+        </div>
       </div>
     </BrowserRouter>
   );
