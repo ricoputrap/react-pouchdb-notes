@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
+import HomePage from "./pages/HomePage";
 
 function App() {
+  const [notes, setNotes] = useState([
+    {
+      _id: 1,
+      title: "My First Note",
+      body: "This is the body of my first notes.",
+      updatedAt: new Date()
+    },
+    {
+      _id: 2,
+      title: "My Second Note",
+      body: "This is the body of my second notes.",
+      updatedAt: new Date()
+    }
+  ])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomePage notes={notes} />
     </div>
   );
 }
