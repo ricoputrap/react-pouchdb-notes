@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
+
 const NoteList = ({notes}) => {
   return (
     <div>
       {notes.map(note => (
         <div>
-          <h2>{note.title}</h2>
+          <Link to={`/notes/${note._id}`}>
+            <h2>{note.title}</h2>
+          </Link>
         </div>
       ))}
     </div>
